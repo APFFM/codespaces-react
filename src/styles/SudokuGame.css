@@ -1,3 +1,6 @@
+/* =========================
+   General Container Styles
+============================ */
 .sudoku-container {
   display: flex;
   flex-direction: column;
@@ -13,8 +16,12 @@
   color: #e1e1e1;
 }
 
+/* =========================
+   Header & Description
+============================ */
 .sudoku-header {
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .sudoku-header h2 {
@@ -32,17 +39,23 @@
   color: #aaa;
 }
 
+/* =========================
+   Content & Controls
+============================ */
 .sudoku-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  width: 100%;
+  max-width: 800px;
 }
 
 .sudoku-controls {
   display: flex;
   justify-content: space-between;
-  width: 360px;
+  width: 100%;
+  max-width: 600px;
   margin-bottom: 10px;
 }
 
@@ -72,209 +85,83 @@
   align-items: center;
 }
 
-.timer, .hints-counter {
+.timer,
+.hints-counter {
   font-size: 14px;
 }
 
-.sudoku-board {
+/* =========================
+   Game Message
+============================ */
+.game-message {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  margin-bottom: 10px;
+}
+
+.sudoku-container.dark-mode .game-message {
+  background-color: #2d2d2d;
+  border-color: #444;
+}
+
+/* =========================
+   Game Area Layout
+============================ */
+.game-area {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* =========================
+   Actions Panel (Left Side)
+============================ */
+.actions-panel-left {
   display: flex;
   flex-direction: column;
-  width: 360px;
-  height: 360px;
-  border: 2px solid #333;
+  gap: 10px;
+  width: 120px;
 }
 
-.sudoku-container.dark-mode .sudoku-board {
-  border-color: #666;
-}
-
-.sudoku-row {
-  display: flex;
-  height: 40px;
-}
-
-.sudoku-cell {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #aaa;
-  position: relative;
-  cursor: pointer;
-  font-size: 20px;
-  font-weight: bold;
-  background-color: #f8f8f8;
-  transition: all 0.2s;
-}
-
-.sudoku-container.dark-mode .sudoku-cell {
-  background-color: #333;
-  border-color: #555;
-}
-
-.sudoku-cell.even-box {
-  background-color: #edf5f5;
-}
-
-.sudoku-container.dark-mode .sudoku-cell.even-box {
-  background-color: #2a3535;
-}
-
-/* Add border for 3x3 boxes */
-.sudoku-cell:nth-child(3n) {
-  border-right: 2px solid #333;
-}
-
-.sudoku-row:nth-child(3n) .sudoku-cell {
-  border-bottom: 2px solid #333;
-}
-
-.sudoku-container.dark-mode .sudoku-cell:nth-child(3n) {
-  border-right: 2px solid #666;
-}
-
-.sudoku-container.dark-mode .sudoku-row:nth-child(3n) .sudoku-cell {
-  border-bottom: 2px solid #666;
-}
-
-.sudoku-cell:first-child {
-  border-left: none;
-}
-
-.sudoku-row:first-child .sudoku-cell {
-  border-top: none;
-}
-
-.sudoku-cell.selected {
-  background-color: #c2dfff;
-}
-
-.sudoku-container.dark-mode .sudoku-cell.selected {
-  background-color: #1a3a5a;
-}
-
-.sudoku-cell.initial {
-  background-color: #e6e6e6;
-}
-
-.sudoku-container.dark-mode .sudoku-cell.initial {
-  background-color: #2d2d2d;
-}
-
-.sudoku-cell.error {
-  background-color: #ffcccc;
-}
-
-.sudoku-container.dark-mode .sudoku-cell.error {
-  background-color: #5a1a1a;
-}
-
-.sudoku-cell.same-value {
-  background-color: #e0f0ff;
-}
-
-.sudoku-container.dark-mode .sudoku-cell.same-value {
-  background-color: #253545;
-}
-
-.cell-value {
-  color: #333;
-  font-size: 24px;
-}
-
-.sudoku-container.dark-mode .cell-value {
-  color: #e1e1e1;
-}
-
-.initial .cell-value {
-  color: #000;
-}
-
-.sudoku-container.dark-mode .initial .cell-value {
-  color: #fff;
-}
-
-.notes-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  width: 100%;
-  height: 100%;
-  font-size: 10px;
-}
-
-.note {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-}
-
-.sudoku-container.dark-mode .note {
-  color: #aaa;
-}
-
-.number-pad {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
-  width: 360px;
-  margin-top: 15px;
-}
-
-.number-button {
-  padding: 10px 0;
-  font-size: 18px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+.actions-panel-left button {
+  padding: 12px 10px;
+  font-size: 14px;
   border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.1s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.sudoku-container.dark-mode .number-button {
+.actions-panel-left button:hover {
+  background-color: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.sudoku-container.dark-mode .actions-panel-left button {
   background-color: #333;
   color: #e1e1e1;
   border-color: #555;
 }
 
-.number-button:hover {
-  background-color: #e0e0e0;
-}
-
-.sudoku-container.dark-mode .number-button:hover {
+.sudoku-container.dark-mode .actions-panel-left button:hover {
   background-color: #444;
 }
 
-.number-button.erase {
-  grid-column: span 2;
-}
-
-.game-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 360px;
-}
-
-.game-actions button {
-  padding: 8px 16px;
-  font-size: 14px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.2s;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-}
-
-.sudoku-container.dark-mode .game-actions button {
-  background-color: #333;
-  color: #e1e1e1;
-  border-color: #555;
-}
-
+/* Specific button styles */
 .note-button.active {
   background-color: #c5e1a5;
   border-color: #8bc34a;
@@ -320,21 +207,334 @@
   border-color: #2d6a2f;
 }
 
-.restart-button {
+/* =========================
+   Number Pad Side Panels
+============================ */
+.number-pad-left,
+.number-pad-right {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 60px;
+}
+
+.number-pad-left {
+  margin-right: 10px;
+}
+
+.number-pad-right {
+  margin-left: 10px;
+}
+
+.number-button-vertical {
+  height: 35px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.number-button-vertical:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.sudoku-container.dark-mode .number-button-vertical {
+  background-color: #333;
+  color: #e1e1e1;
+  border-color: #555;
+}
+
+.sudoku-container.dark-mode .number-button-vertical:hover {
+  background-color: #444;
+}
+
+.erase-button {
+  font-size: 16px;
   background-color: #ffecb3;
   border-color: #ffd54f;
 }
 
-.sudoku-container.dark-mode .restart-button {
+.sudoku-container.dark-mode .erase-button {
   background-color: #453a1a;
   border-color: #6b5a2a;
 }
 
-.game-actions button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* =========================
+   Number Pad Grid (3x3 layout)
+============================ */
+.number-pad-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 120px;
 }
 
+.number-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.number-button-grid {
+  height: 36px;
+  width: 36px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.number-button-grid:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.sudoku-container.dark-mode .number-button-grid {
+  background-color: #333;
+  color: #e1e1e1;
+  border-color: #555;
+}
+
+.sudoku-container.dark-mode .number-button-grid:hover {
+  background-color: #444;
+}
+
+.erase-button-wide {
+  height: 36px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #ffecb3;
+  border-color: #ffd54f;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.erase-button-wide:hover {
+  background-color: #ffe082;
+  transform: translateY(-2px);
+}
+
+.sudoku-container.dark-mode .erase-button-wide {
+  background-color: #453a1a;
+  border-color: #6b5a2a;
+  color: #e1e1e1;
+}
+
+.sudoku-container.dark-mode .erase-button-wide:hover {
+  background-color: #554825;
+}
+
+/* =========================
+   Sudoku Board & Cells
+============================ */
+.sudoku-board {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  height: 360px;
+  border: 3px solid #333;
+}
+
+.sudoku-container.dark-mode .sudoku-board {
+  border-color: #666;
+}
+
+.sudoku-row {
+  display: flex;
+  height: 40px;
+}
+
+.sudoku-cell {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #aaa;
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #f8f8f8;
+  transition: all 0.2s;
+}
+
+/* Dark mode for cells */
+.sudoku-container.dark-mode .sudoku-cell {
+  background-color: #333;
+  border-color: #555;
+}
+
+/* Even box alternate background */
+.sudoku-cell.even-box {
+  background-color: #edf5f5;
+}
+
+.sudoku-container.dark-mode .sudoku-cell.even-box {
+  background-color: #2a3535;
+}
+
+/* -------------------------
+   Outer Border for Sudoku Grid - UPDATED for thicker horizontal borders
+-------------------------- */
+/* First row cells: thicker top border */
+.sudoku-row:first-child .sudoku-cell {
+  border-top: 3px solid #333;
+}
+
+.sudoku-container.dark-mode .sudoku-row:first-child .sudoku-cell {
+  border-top: 3px solid #666;
+}
+
+/* First cell in each row: thicker left border */
+.sudoku-cell:first-child {
+  border-left: 3px solid #333;
+}
+
+.sudoku-container.dark-mode .sudoku-cell:first-child {
+  border-left: 3px solid #666;
+}
+
+/* Every 3rd cell in a row: thicker right border */
+.sudoku-cell:nth-child(3n) {
+  border-right: 3px solid #333;
+}
+
+.sudoku-container.dark-mode .sudoku-cell:nth-child(3n) {
+  border-right: 3px solid #666;
+}
+
+/* Every 3rd row: thicker bottom border - FIXED */
+.sudoku-row:nth-child(3n) .sudoku-cell {
+  border-bottom: 3px solid #333;
+}
+
+.sudoku-container.dark-mode .sudoku-row:nth-child(3n) .sudoku-cell {
+  border-bottom: 3px solid #666;
+}
+
+/* FIXED: Properly thickening horizontal borders between 3-4 and 6-7 */
+/* Make top border thicker for rows 4 and 7 (directly after rows 3 and 6) */
+.sudoku-row:nth-child(4) .sudoku-cell, 
+.sudoku-row:nth-child(7) .sudoku-cell {
+  border-top: 3px solid #333;
+}
+
+.sudoku-container.dark-mode .sudoku-row:nth-child(4) .sudoku-cell,
+.sudoku-container.dark-mode .sudoku-row:nth-child(7) .sudoku-cell {
+  border-top: 3px solid #666;
+}
+
+/* Remove the duplicate border definitions that may cause conflicts */
+.sudoku-row:nth-child(3) .sudoku-cell,
+.sudoku-row:nth-child(6) .sudoku-cell {
+  /* Keep the bottom border defined in the "Every 3rd row" rule above */
+  /* This ensures we don't have double borders that overlap */
+}
+
+/* -------------------------
+   Cell States
+-------------------------- */
+.sudoku-cell.selected {
+  background-color: #c2dfff;
+}
+
+.sudoku-container.dark-mode .sudoku-cell.selected {
+  background-color: #1a3a5a;
+}
+
+.sudoku-cell.initial {
+  background-color: #e6e6e6;
+}
+
+.sudoku-container.dark-mode .sudoku-cell.initial {
+  background-color: #2d2d2d;
+}
+
+.sudoku-cell.error {
+  background-color: #ffcccc;
+}
+
+.sudoku-container.dark-mode .sudoku-cell.error {
+  background-color: #5a1a1a;
+}
+
+.sudoku-cell.same-value {
+  background-color: #e0f0ff;
+}
+
+.sudoku-container.dark-mode .sudoku-cell.same-value {
+  background-color: #253545;
+}
+
+/* -------------------------
+   Cell Value Text
+-------------------------- */
+.cell-value {
+  color: #333;
+  font-size: 24px;
+}
+
+.sudoku-container.dark-mode .cell-value {
+  color: #e1e1e1;
+}
+
+/* If the cell is marked as initial, adjust text color */
+.sudoku-cell.initial .cell-value {
+  color: #000;
+}
+
+.sudoku-container.dark-mode .sudoku-cell.initial .cell-value {
+  color: #fff;
+}
+
+/* =========================
+   Notes (for pencil marks)
+============================ */
+.notes-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+  color: #333;
+}
+
+.sudoku-container.dark-mode .notes-container {
+  color: #e1e1e1;
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+
+.sudoku-container.dark-mode .note {
+  color: #aaa;
+}
+
+/* =========================
+   Win Message
+============================ */
 .win-message {
   background-color: #e8f5e9;
   border: 2px solid #81c784;
@@ -343,6 +543,8 @@
   text-align: center;
   margin: 10px 0;
   animation: fadeIn 0.5s;
+  width: 100%;
+  max-width: 600px;
 }
 
 .sudoku-container.dark-mode .win-message {
@@ -359,112 +561,212 @@
   color: #81c784;
 }
 
+/* =========================
+   Game Actions
+============================ */
+.game-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+.game-actions button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+
+.game-actions button:hover {
+  transform: translateY(-2px);
+  background-color: #e0e0e0;
+}
+
+.sudoku-container.dark-mode .game-actions button {
+  background-color: #333;
+  color: #e1e1e1;
+  border-color: #555;
+}
+
+/* Note button */
+.note-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.sudoku-container.dark-mode .note-button {
+  background-color: #333;
+  color: #e1e1e1;
+  border-color: #555;
+}
+
+.note-button.active {
+  background-color: #c5e1a5;
+  border-color: #8bc34a;
+}
+
+.sudoku-container.dark-mode .note-button.active {
+  background-color: #2c4a1a;
+  border-color: #4b6d2a;
+}
+
+/* New game & Check buttons */
+.new-game-button {
+  background-color: #c8e6c9;
+  border-color: #81c784;
+}
+
+.sudoku-container.dark-mode .new-game-button {
+  background-color: #1a4a1a;
+  border-color: #2d6a2f;
+}
+
+.check-button {
+  background-color: #d1c4e9;
+  border-color: #9575cd;
+}
+
+.sudoku-container.dark-mode .check-button {
+  background-color: #2a1a5a;
+  border-color: #412c82;
+}
+
+/* Hint button */
+.hint-button {
+  background-color: #bbdefb;
+  border-color: #64b5f6;
+}
+
+.sudoku-container.dark-mode .hint-button {
+  background-color: #1a3a5a;
+  border-color: #2a5b86;
+}
+
+.hint-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================
+   Keyboard Shortcuts Info
+============================ */
+.keyboard-shortcuts-info {
+  max-width: 600px;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  padding: 15px;
+  margin-top: 20px;
+  font-weight: 500;
+}
+
+.keyboard-shortcuts-info h4 {
+  font-size: 16px;
+  color: #333;
+  margin: 0 0 10px;
+}
+
+.sudoku-container.dark-mode .keyboard-shortcuts-info {
+  background-color: #2d2d2d;
+}
+
+.sudoku-container.dark-mode .keyboard-shortcuts-info h4 {
+  color: #e1e1e1;
+}
+
+.keyboard-shortcuts-info ul {
+  list-style: none;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.keyboard-shortcuts-info li {
+  position: relative;
+  margin: 5px 0;
+  padding-left: 20px;
+}
+
+.keyboard-shortcuts-info li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+}
+
+/* =========================
+   Animations
+============================ */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-.controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
+/* =========================
+   Media Queries
+============================ */
+@media (max-width: 700px) {
+  .game-area {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .actions-panel-left {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 360px;
+    margin-bottom: 10px;
+  }
+  
+  .actions-panel-left button {
+    flex: 1 0 auto;
+    min-width: 80px;
+  }
+  
+  .number-pad-left, .number-pad-right {
+    flex-direction: row;
+    width: 360px;
+    margin: 0;
+  }
+  
+  .number-pad-left {
+    margin-bottom: 10px;
+  }
+  
+  .number-pad-right {
+    margin-top: 10px;
+  }
+  
+  .number-button-vertical {
+    flex: 1;
+    height: 40px;
+  }
 
-.controls select, .controls button {
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: white;
-  cursor: pointer;
-}
-
-.controls button:hover {
-  background-color: #f0f0f0;
-}
-
-.sudoku-board {
-  display: grid;
-  grid-template-rows: repeat(9, 1fr);
-  border: 2px solid #333;
-  max-width: 450px;
-  width: 100%;
-}
-
-.sudoku-row {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-}
-
-.sudoku-cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px;
-  border: 1px solid #999;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-/* Add thicker borders for 3x3 box separation */
-.sudoku-row:nth-child(3n) .sudoku-cell {
-  border-bottom: 2px solid #333;
-}
-
-.sudoku-cell:nth-child(3n) {
-  border-right: 2px solid #333;
-}
-
-.sudoku-cell.initial {
-  background-color: #f5f5f5;
-  color: #333;
-  font-weight: bold;
-  cursor: not-allowed;
-}
-
-.sudoku-cell.selected {
-  background-color: #e0f0ff;
-}
-
-.number-pad {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
-  max-width: 300px;
-  margin-top: 20px;
-}
-
-.number-pad button {
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  background-color: white;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.number-pad button:hover {
-  background-color: #f0f0f0;
-}
-
-.completion-message {
-  margin-top: 20px;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.completion-message.correct {
-  background-color: #dff0d8;
-  color: #3c763d;
-  border: 1px solid #d6e9c6;
-}
-
-.completion-message.incorrect {
-  background-color: #f2dede;
-  color: #a94442;
-  border: 1px solid #ebccd1;
+  .number-pad-grid {
+    width: 360px;
+    margin-top: 10px;
+  }
+  
+  .number-grid {
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: 1fr;
+  }
+  
+  .number-button-grid {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -474,8 +776,652 @@
     font-size: 16px;
   }
   
-  .number-pad button {
-    padding: 8px;
+  .sudoku-board {
+    width: 315px;
+    height: 315px;
+  }
+  
+  .actions-panel-left,
+  .number-pad-right {
+    width: 315px;
+  }
+  
+  .actions-panel-left button,
+  .number-button-vertical {
+    font-size: 13px;
+    padding: 8px 5px;
+  }
+
+  .number-pad-grid {
+    width: 315px;
+  }
+  
+  .number-grid {
+    gap: 3px;
+  }
+  
+  .number-button-grid {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+}
+
+/* =========================
+   Notepad Styles (NEW)
+============================ */
+.notepad-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.notepad-container {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease-out;
+}
+
+.sudoku-container.dark-mode .notepad-container {
+  background-color: #2d2d2d;
+  color: #e1e1e1;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.notepad-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.sudoku-container.dark-mode .notepad-header {
+  border-bottom-color: #444;
+}
+
+.notepad-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.notepad-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.notepad-tab {
+  padding: 6px 12px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.notepad-tab.active {
+  background-color: #e2f0fc;
+  border-color: #9ecaed;
+  font-weight: 500;
+}
+
+.sudoku-container.dark-mode .notepad-tab {
+  background-color: #3a3a3a;
+  border-color: #555;
+}
+
+.sudoku-container.dark-mode .notepad-tab.active {
+  background-color: #1a3a5a;
+  border-color: #2a5b86;
+}
+
+.close-notepad {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.sudoku-container.dark-mode .close-notepad {
+  color: #aaa;
+}
+
+.close-notepad:hover {
+  color: #333;
+}
+
+.sudoku-container.dark-mode .close-notepad:hover {
+  color: #fff;
+}
+
+.notepad-content {
+  padding: 20px;
+}
+
+/* Text notepad */
+.text-notepad {
+  width: 100%;
+  min-height: 250px;
+  resize: none;
+  padding: 15px;
+  font-size: 16px;
+  line-height: 1.5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-image: 
+    linear-gradient(#ddd 1px, transparent 1px), 
+    linear-gradient(90deg, #ddd 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-color: #fff;
+}
+
+.sudoku-container.dark-mode .text-notepad {
+  background-color: #333;
+  color: #e1e1e1;
+  border-color: #555;
+  background-image: 
+    linear-gradient(#444 1px, transparent 1px), 
+    linear-gradient(90deg, #444 1px, transparent 1px);
+}
+
+/* Drawing notepad */
+.drawing-canvas-container {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.sudoku-container.dark-mode .drawing-canvas-container {
+  border-color: #555;
+  background-color: #333;
+}
+
+canvas.drawing-canvas {
+  width: 100%;
+  height: 250px;
+  cursor: crosshair;
+  background-image: 
+    linear-gradient(#ddd 1px, transparent 1px), 
+    linear-gradient(90deg, #ddd 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.sudoku-container.dark-mode canvas.drawing-canvas {
+  background-image: 
+    linear-gradient(#444 1px, transparent 1px), 
+    linear-gradient(90deg, #444 1px, transparent 1px);
+}
+
+.notepad-tools {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.sudoku-container.dark-mode .notepad-tools {
+  border-top-color: #444;
+}
+
+.drawing-tools {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.color-picker {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.brush-size {
+  width: 100px;
+}
+
+.notepad-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.notepad-button {
+  padding: 8px 15px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+
+.notepad-button:hover {
+  background-color: #e6e6e6;
+}
+
+.sudoku-container.dark-mode .notepad-button {
+  background-color: #3a3a3a;
+  color: #e1e1e1;
+  border-color: #555;
+}
+
+.sudoku-container.dark-mode .notepad-button:hover {
+  background-color: #444;
+}
+
+.clear-button {
+  background-color: #ffebee;
+  border-color: #ffcdd2;
+}
+
+.sudoku-container.dark-mode .clear-button {
+  background-color: #4a1a1a;
+  border-color: #5a2a2a;
+}
+
+.save-button {
+  background-color: #e3f2fd;
+  border-color: #bbdefb;
+}
+
+.sudoku-container.dark-mode .save-button {
+  background-color: #1a3a5a;
+  border-color: #2a5b86;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+  .notepad-container {
+    width: 95%;
+  }
+  
+  .text-notepad {
     font-size: 14px;
+  }
+  
+  .notepad-tools {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .drawing-tools {
+    justify-content: center;
+  }
+  
+  .notepad-actions {
+    justify-content: center;
+  }
+}
+
+/* =========================
+   Notes List Styles (NEW)
+============================ */
+.notes-list-container {
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+  padding: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.sudoku-container.dark-mode .notes-list-container {
+  border-color: #444;
+}
+
+.notes-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.notes-list-header h4 {
+  margin: 0;
+}
+
+.close-list {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #666;
+}
+
+.sudoku-container.dark-mode .close-list {
+  color: #aaa;
+}
+
+.notes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.note-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  border: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.note-item:hover {
+  background-color: #f5f5f5;
+}
+
+.sudoku-container.dark-mode .note-item {
+  border-color: #444;
+}
+
+.sudoku-container.dark-mode .note-item:hover {
+  background-color: #383838;
+}
+
+.note-item.selected {
+  background-color: #e3f2fd;
+  border-color: #bbdefb;
+}
+
+.sudoku-container.dark-mode .note-item.selected {
+  background-color: #1a3a5a;
+  border-color: #2a5b86;
+}
+
+.note-item-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.note-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  color: #666;
+}
+
+.sudoku-container.dark-mode .note-icon {
+  color: #aaa;
+}
+
+.note-details {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.note-title {
+  font-weight: 500;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-preview {
+  color: #666;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sudoku-container.dark-mode .note-preview {
+  color: #aaa;
+}
+
+.note-date {
+  font-size: 11px;
+  color: #999;
+  margin-top: 2px;
+}
+
+.delete-note {
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: all 0.2s;
+}
+
+.delete-note:hover {
+  color: #f44336;
+  background-color: rgba(244, 67, 54, 0.08);
+}
+
+.no-notes-message {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+  font-style: italic;
+}
+
+.notepad-title-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.notepad-title {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.notepad-title:hover {
+  text-decoration: underline;
+}
+
+.note-timestamp {
+  font-size: 11px;
+  color: #999;
+  margin-top: 2px;
+}
+
+.notepad-title-input {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.sudoku-container.dark-mode .notepad-title-input {
+  background-color: #333;
+  color: #e1e1e1;
+  border-color: #555;
+}
+
+/* Thumbnail for saved drawing */
+.notepad-thumbnail {
+  margin-top: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  max-width: 150px;
+}
+
+.notepad-thumbnail:hover {
+  transform: scale(1.05);
+}
+
+.sudoku-container.dark-mode .notepad-thumbnail {
+  border-color: #444;
+}
+
+.notepad-thumbnail img {
+  max-width: 100%;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.notepad-thumbnail span {
+  font-size: 12px;
+  color: #666;
+}
+
+.sudoku-container.dark-mode .notepad-thumbnail span {
+  color: #aaa;
+}
+
+/* New responsive adjustments */
+@media (max-width: 500px) {
+  .notes-list-container {
+    max-height: 250px;
+  }
+  
+  .note-title {
+    max-width: 180px;
+  }
+}
+
+/* =========================
+   Notes Preview Section (NEW)
+============================ */
+.notes-preview-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+  justify-content: center;
+}
+
+.note-preview {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  width: 45%;
+  min-height: 100px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+.note-preview:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sudoku-container.dark-mode .note-preview {
+  background-color: #2d2d2d;
+  border-color: #444;
+}
+
+.note-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #555;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.sudoku-container.dark-mode .note-preview-header {
+  color: #bbb;
+  border-bottom-color: #444;
+}
+
+.note-preview-content {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #666;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  height: 55px;
+}
+
+.sudoku-container.dark-mode .note-preview-content {
+  color: #aaa;
+}
+
+.drawing-thumbnail {
+  max-width: 100%;
+  height: auto;
+  max-height: 80px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 4px;
+  border: 1px solid #eee;
+}
+
+.sudoku-container.dark-mode .drawing-thumbnail {
+  border-color: #444;
+}
+
+/* =========================
+   Responsive adjustments for notes preview
+============================ */
+@media (max-width: 600px) {
+  .notes-preview-section {
+    flex-direction: column;
+  }
+  
+  .note-preview {
+    width: 100%;
   }
 }
