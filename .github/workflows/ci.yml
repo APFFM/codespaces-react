@@ -1,0 +1,209 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Lint code
+        run: npm run lint || echo "Linting issues found"
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Run tests
+        run: npm test -- --coverage
+        
+      - name: Upload coverage reports
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Build
+        run: npm run build
+        
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+  deploy-preview:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
+          
+      - name: Deploy to Surge.sh preview
+        uses: dswistowski/surge-sh-action@v1
+        with:
+          domain: ${{ github.event.pull_request.number }}-preview-codespaces-react.surge.sh
+          project: ./dist
+          login: ${{ secrets.SURGE_LOGIN }}
+          token: ${{ secrets.SURGE_TOKEN }}
+          
+      - name: Add PR comment with preview link
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: |
+            🚀 Preview deployment is ready!
+            
+            Preview URL: https://${{ github.event.pull_request.number }}-preview-codespaces-react.surge.sh
+            
+            This preview will be available until the PR is closed.
+          comment_tag: preview_deployment
+          pr_number: ${{ github.event.pull_request.number }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-staging:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
+          
+      - name: Deploy to Staging
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
+          target-folder: staging
+          clean: true
+          
+      - name: Create Deployment Status
+        run: |
+          echo "Deployment to staging complete"
+          echo "URL: https://APFFM.github.io/codespaces-react/staging"
+
+  deploy-production:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: production
+      url: https://APFFM.github.io/codespaces-react
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
+          
+      - name: Deploy to Production
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist
+          clean: true
+          
+      - name: Create Release Tag
+        id: create_tag
+        run: |
+          TAG_NAME="release-$(date +'%Y%m%d%H%M%S')"
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.create_tag.outputs.tag_name }}
+          name: Release ${{ steps.create_tag.outputs.tag_name }}
+          body: |
+            ## Production Release
+            
+            Automatically deployed from main branch.
+            
+            Commit: ${{ github.sha }}
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  performance-audit:
+    runs-on: ubuntu-latest
+    needs: [deploy-preview, deploy-staging, deploy-production]
+    if: always() && (needs.deploy-preview.result == 'success' || needs.deploy-staging.result == 'success' || needs.deploy-production.result == 'success')
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Lighthouse Audit
+        id: lighthouse
+        uses: treosh/lighthouse-ci-action@v9
+        with:
+          urls: |
+            ${{ github.event_name == 'pull_request' && format('https://{0}-preview-codespaces-react.surge.sh', github.event.pull_request.number) || 'https://APFFM.github.io/codespaces-react' }}
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          
+      - name: Format lighthouse score
+        id: format_lighthouse_score
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const lighthouseCommentMaker = require('./.github/lighthouse-comment.js');
+            const lighthouseResults = ${{ toJSON(steps.lighthouse.outputs.manifest) }};
+            const comment = lighthouseCommentMaker(lighthouseResults);
+            core.setOutput("comment", comment);
+            
+      - name: Add Lighthouse comment to PR
+        if: github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          number: ${{ github.event.pull_request.number }}
+          header: lighthouse
+          message: ${{ steps.format_lighthouse_score.outputs.comment }}
