@@ -222,6 +222,17 @@
   animation: fadeIn var(--animation-speed);
 }
 
+.nav-button svg {
+  margin-right: 5px;
+  font-size: 0.9em;
+}
+
+.nav-button[data-tab="chart"] {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 @media (max-width: 768px) {
   .teacher-ai-nav {
     flex-wrap: wrap;

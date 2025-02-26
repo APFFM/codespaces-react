@@ -43,18 +43,25 @@ const ChatInterface = ({ messages, setMessages, apiKeys, isDarkMode }) => {
       let response;
       let activeApiKey;
       
+      const systemMessage = {
+        role: "system", 
+        content: "You are a knowledgeable teacher AI. Provide accurate, helpful information based on your knowledge. Use real data and facts confidently without apologies about limitations or being an AI. When appropriate, include numerical data that could be used for visualizations."
+      };
+      
       if (selectedModel === 'openai') {
         if (!apiKeys.openai) {
           throw new Error('OpenAI API key is missing. Please add it in Settings.');
         }
         activeApiKey = apiKeys.openai;
-        response = await sendMessageToOpenAI([...messages, userMessage], activeApiKey);
+        // Add the system message to the conversation
+        response = await sendMessageToOpenAI([systemMessage, ...messages, userMessage], activeApiKey);
       } else {
         if (!apiKeys.deepseek) {
           throw new Error('DeepSeek API key is missing. Please add it in Settings.');
         }
         activeApiKey = apiKeys.deepseek;
-        response = await sendMessageToDeepSeek([...messages, userMessage], activeApiKey);
+        // Add the system message to the conversation
+        response = await sendMessageToDeepSeek([systemMessage, ...messages, userMessage], activeApiKey);
       }
       
       const responseTimestamp = new Date().toISOString();

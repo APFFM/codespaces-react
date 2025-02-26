@@ -395,3 +395,30 @@
     width: 100%;
   }
 }
+
+.message-chart {
+  margin-top: 15px;
+  padding: 15px;
+  background: var(--chart-bg-color, #f8f9fa);
+  border: 1px solid var(--chart-border-color, #dee2e6);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dark-mode .message-chart {
+  --chart-bg-color: #2d2d2d;
+  --chart-border-color: #444;
+}
+
+.chart-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  height: 300px;
+}
+
+@media (max-width: 768px) {
+  .chart-container {
+    height: 250px;
+  }
+}

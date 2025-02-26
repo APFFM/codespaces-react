@@ -5,8 +5,9 @@ import VoiceInteraction from './VoiceInteraction.jsx';
 import ApiSettings from './ApiSettings.jsx';
 import SudokuGame from './SudokuGame.jsx';
 import { ThemeContext } from '../context/ThemeContext.jsx';
-import { FaMoon, FaSun, FaKeyboard, FaGamepad } from 'react-icons/fa';
+import { FaMoon, FaSun, FaKeyboard, FaGamepad, FaChartLine } from 'react-icons/fa';
 import '../styles/TeacherAI.css';
+import AIChartTab from './AIChartTab.jsx';
 
 const TeacherAI = () => {
   const [activeTab, setActiveTab] = useState('chat');
@@ -86,6 +87,12 @@ const TeacherAI = () => {
             <FaGamepad /> Sudoku
           </button>
           <button 
+            className={`tab-button ${activeTab === 'chart' ? 'active' : ''}`}
+            onClick={() => handleTabChange('chart')}
+          >
+            <FaChartLine /> Charts
+          </button>
+          <button 
             className={`tab-button ${activeTab === 'settings' ? 'active' : ''}`}
             onClick={() => handleTabChange('settings')}
           >
@@ -125,6 +132,12 @@ const TeacherAI = () => {
         {activeTab === 'sudoku' && (
           <SudokuGame 
             isDarkMode={isDarkMode}
+          />
+        )}
+        {activeTab === 'chart' && (
+          <AIChartTab 
+            isDarkMode={isDarkMode}
+            apiKeys={apiKeys}
           />
         )}
         {activeTab === 'settings' && (
