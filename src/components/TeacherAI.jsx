@@ -3,8 +3,9 @@ import ChatInterface from './ChatInterface.jsx';
 import ResearchTools from './ResearchTools.jsx';
 import VoiceInteraction from './VoiceInteraction.jsx';
 import ApiSettings from './ApiSettings.jsx';
+import SudokuGame from './SudokuGame.jsx';
 import { ThemeContext } from '../context/ThemeContext.jsx';
-import { FaMoon, FaSun, FaKeyboard } from 'react-icons/fa';
+import { FaMoon, FaSun, FaKeyboard, FaGamepad } from 'react-icons/fa';
 import '../styles/TeacherAI.css';
 
 const TeacherAI = () => {
@@ -79,6 +80,12 @@ const TeacherAI = () => {
             Voice
           </button>
           <button 
+            className={`tab-button ${activeTab === 'sudoku' ? 'active' : ''}`}
+            onClick={() => handleTabChange('sudoku')}
+          >
+            <FaGamepad /> Sudoku
+          </button>
+          <button 
             className={`tab-button ${activeTab === 'settings' ? 'active' : ''}`}
             onClick={() => handleTabChange('settings')}
           >
@@ -112,6 +119,11 @@ const TeacherAI = () => {
             messages={messages} 
             setMessages={setMessages} 
             apiKeys={apiKeys}
+            isDarkMode={isDarkMode}
+          />
+        )}
+        {activeTab === 'sudoku' && (
+          <SudokuGame 
             isDarkMode={isDarkMode}
           />
         )}
