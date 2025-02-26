@@ -2,7 +2,7 @@
   "name": "codespaces-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yourusername.github.io/codespaces-react",
+  "homepage": "https://APFFM.github.io/codespaces-react",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
