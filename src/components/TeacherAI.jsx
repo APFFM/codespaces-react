@@ -4,10 +4,11 @@ import ResearchTools from './ResearchTools.jsx';
 import VoiceInteraction from './VoiceInteraction.jsx';
 import ApiSettings from './ApiSettings.jsx';
 import SudokuGame from './SudokuGame.jsx';
-import { ThemeContext } from '../context/ThemeContext.jsx';
-import { FaMoon, FaSun, FaKeyboard, FaGamepad, FaChartLine } from 'react-icons/fa';
-import '../styles/TeacherAI.css';
 import AIChartTab from './AIChartTab.jsx';
+import ResearchChartTab from './ResearchChartTab.jsx';
+import { ThemeContext } from '../context/ThemeContext.jsx';
+import { FaMoon, FaSun, FaKeyboard, FaGamepad, FaChartLine, FaSearch, FaChartBar } from 'react-icons/fa';
+import '../styles/TeacherAI.css';
 
 const TeacherAI = () => {
   const [activeTab, setActiveTab] = useState('chat');
@@ -75,6 +76,12 @@ const TeacherAI = () => {
             Research
           </button>
           <button 
+            className={`tab-button ${activeTab === 'dataviz' ? 'active' : ''}`}
+            onClick={() => handleTabChange('dataviz')}
+          >
+            <FaSearch /> + <FaChartBar /> Data Research
+          </button>
+          <button 
             className={`tab-button ${activeTab === 'voice' ? 'active' : ''}`}
             onClick={() => handleTabChange('voice')}
           >
@@ -118,6 +125,12 @@ const TeacherAI = () => {
               content,
               timestamp: new Date().toISOString()
             }])}
+            isDarkMode={isDarkMode}
+          />
+        )}
+        {activeTab === 'dataviz' && (
+          <ResearchChartTab 
+            apiKeys={apiKeys}
             isDarkMode={isDarkMode}
           />
         )}
