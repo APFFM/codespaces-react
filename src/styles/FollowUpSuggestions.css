@@ -1,0 +1,78 @@
+.follow-up-container {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.follow-up-header {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.suggestions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.suggestion-button {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.suggestion-button:hover {
+  background-color: var(--accent-light);
+  border-color: var(--accent-color);
+  transform: translateY(-1px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dark-mode .suggestion-button {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .suggestion-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.suggestion-loading {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  font-style: italic;
+}
+
+.dot-animation {
+  display: inline-block;
+  position: relative;
+}
+
+.dot-animation::after {
+  content: '...';
+  position: absolute;
+  animation: dotAnimate 1.5s infinite;
+  width: 1.5em;
+  text-align: left;
+  overflow: hidden;
+}
+
+@keyframes dotAnimate {
+  0% { width: 0; }
+  33% { width: 0.5em; }
+  66% { width: 1em; }
+  100% { width: 1.5em; }
+}
