@@ -1,70 +1,51 @@
-# GitHub Codespaces ♥️ React
+# 🎓 Mini Teacher AI — React + OpenAI (BYOK)
 
-Welcome to your shiny new Codespace running React! We've got everything fired up and running for you to explore React.
+A minimalist AI-powered **teaching assistant** built with React + Vite. Connects to OpenAI’s GPT-3.5+ with your own API key to provide real-time tutoring, Q&A, and study help. Fast, portable, and GitHub Codespaces-ready.
 
-You've got a blank canvas to work on from a git perspective as well. There's a single initial commit with the what you're seeing right now - where you go from here is up to you!
+[🚀 Live Demo](https://apffm.github.io/codespaces-react/)
 
-Everything you do here is contained within this one codespace. There is no repository on GitHub yet. If and when you’re ready you can click "Publish Branch" and we’ll create your repository and push up your project. If you were just exploring then and have no further need for this code then you can simply delete your codespace and it's gone forever.
+---
 
-This project was bootstrapped for you with [Vite](https://vitejs.dev/).
+## ✨ Features
+- 🧠 **Chat with OpenAI GPT** (BYOK — bring your own key)
+- 💬 **Multi-chat tabs** with save/load/delete
+- 🔄 **Streaming responses** with auto-scroll
+- 🌙 **Dark/light mode toggle**
+- 📊 **Token usage display** per chat
+- 📁 **Export chats** as text
+- 💾 **Local storage** persistence
+- ⚡ **Vite + Tailwind CSS**
+- 🧑‍💻 Ready for **GitHub Codespaces**
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🛠 Getting Started
 
-### `npm start`
+```bash
+# 1. Clone & install
+npm install
 
-We've already run this for you in the `Codespaces: server` terminal window below. If you need to stop the server for any reason you can just run `npm start` again to bring it back online.
+# 2. Run the app
+npm run dev
+# Visit: http://localhost:5173
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000/](http://localhost:3000/) in the built-in Simple Browser (`Cmd/Ctrl + Shift + P > Simple Browser: Show`) to view your running application.
+---
 
-The page will reload automatically when you make changes.\
-You may also see any lint errors in the console.
+## 🔑 API Key (BYOK)
+Input your OpenAI API key on first use. It’s stored **locally in-browser** (never sent elsewhere).
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📦 Deployment
 
-### `npm run build`
+```bash
+npm run build
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Deploy via GitHub Pages or any static host. See `vite.config.js` for base path settings.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Learn More
-
-You can learn more in the [Vite documentation](https://vitejs.dev/guide/).
-
-To learn Vitest, a Vite-native testing framework, go to [Vitest documentation](https://vitest.dev/guide/)
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://sambitsahoo.com/blog/vite-code-splitting-that-works.html](https://sambitsahoo.com/blog/vite-code-splitting-that-works.html)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://github.com/btd/rollup-plugin-visualizer#rollup-plugin-visualizer](https://github.com/btd/rollup-plugin-visualizer#rollup-plugin-visualizer)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://dev.to/hamdankhan364/simplifying-progressive-web-app-pwa-development-with-vite-a-beginners-guide-38cf](https://dev.to/hamdankhan364/simplifying-progressive-web-app-pwa-development-with-vite-a-beginners-guide-38cf)
-
-### Advanced Configuration
-
-This section has moved here: [https://vitejs.dev/guide/build.html#advanced-base-options](https://vitejs.dev/guide/build.html#advanced-base-options)
-
-### Deployment
-
-This section has moved here: [https://vitejs.dev/guide/build.html](https://vitejs.dev/guide/build.html)
-
-### Troubleshooting
-
-This section has moved here: [https://vitejs.dev/guide/troubleshooting.html](https://vitejs.dev/guide/troubleshooting.html)
+## 📄 License
+MIT
